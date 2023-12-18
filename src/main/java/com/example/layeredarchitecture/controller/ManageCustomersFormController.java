@@ -1,8 +1,7 @@
 package com.example.layeredarchitecture.controller;
 
-import com.example.layeredarchitecture.dao.CustomerDAO;
-import com.example.layeredarchitecture.dao.CustomerDAOImpl;
-import com.example.layeredarchitecture.db.DBConnection;
+import com.example.layeredarchitecture.dao.custom.CustomerDAO;
+import com.example.layeredarchitecture.dao.impl.CustomerDAOImpl;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.view.tdm.CustomerTM;
 import com.jfoenix.controls.JFXButton;
@@ -75,7 +74,7 @@ public class ManageCustomersFormController {
             ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
 */
 
-            ArrayList<CustomerDTO> allCustomer = customerDAO.getAllCustomer();
+            ArrayList<CustomerDTO> allCustomer = customerDAO.getAll();
             for (CustomerDTO dto : allCustomer) {
                 tblCustomers.getItems().add(
                         new CustomerTM(
@@ -164,7 +163,7 @@ public class ManageCustomersFormController {
                 pstm.setString(3, address);
                 pstm.executeUpdate();*/
 
-              boolean isSaved = customerDAO.saveCustomer(new CustomerDTO(id,name,address));
+              boolean isSaved = customerDAO.save(new CustomerDTO(id,name,address));
               if (isSaved) {
                   tblCustomers.getItems().add(new CustomerTM(id, name, address));
               }
@@ -182,7 +181,7 @@ public class ManageCustomersFormController {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
                 CustomerDTO dto = new CustomerDTO(id,name,address);
-                customerDAO.updateCustomer(dto);
+                customerDAO.update(dto);
 
 
 
@@ -216,7 +215,7 @@ public class ManageCustomersFormController {
         return pstm.executeQuery().next();*/
 
 
-        boolean isExist = customerDAO.existCustomer(id);
+        boolean isExist = customerDAO.exist(id);
         if (isExist){
             return true;
         }
@@ -233,7 +232,7 @@ public class ManageCustomersFormController {
             }
 
 
-            customerDAO.deleteCustomer(id);
+            customerDAO.delete(id);
 
            /* Connection connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE id=?");
