@@ -170,6 +170,7 @@ public class ManageCustomersFormController {
               boolean isSaved = customerDAO.save(new CustomerDTO(id,name,address));
               if (isSaved) {
                   tblCustomers.getItems().add(new CustomerTM(id, name, address));
+                  getcustomerAndOrders();
               }
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "Failed to save the customer " + e.getMessage()).show();
