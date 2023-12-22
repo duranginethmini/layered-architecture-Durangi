@@ -1,7 +1,10 @@
 package com.example.layeredarchitecture.controller;
 
 import com.example.layeredarchitecture.dao.custom.CustomerDAO;
+import com.example.layeredarchitecture.dao.custom.QueryDAO;
 import com.example.layeredarchitecture.dao.impl.CustomerDAOImpl;
+import com.example.layeredarchitecture.dao.impl.QueryDAOImpl;
+import com.example.layeredarchitecture.model.CustomDTO;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.view.tdm.CustomerTM;
 import com.jfoenix.controls.JFXButton;
@@ -38,6 +41,7 @@ public class ManageCustomersFormController {
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
     CustomerDAO customerDAO = new CustomerDAOImpl();
+    QueryDAO queryDAO = new QueryDAOImpl();
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
         tblCustomers.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -289,5 +293,13 @@ public class ManageCustomersFormController {
         Collections.sort(tempCustomersList);
         return tempCustomersList.get(tempCustomersList.size() - 1).getId();
     }
+    public void getcustomerAndOrders() throws SQLException, ClassNotFoundException {
+        List<CustomDTO> cuslist = queryDAO.customerOrderDetail();
+        // System.out.println(cuslist.indexOf(0));
+        for(CustomDTO dto:cuslist) {
+            System.out.println(dto);
+        }
+    }
+
 
 }

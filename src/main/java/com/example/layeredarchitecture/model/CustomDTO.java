@@ -1,23 +1,27 @@
 package com.example.layeredarchitecture.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class CustomDTO {
     private String id;
     private String name;
-    private String itemCode;
-    private int qty;
-    private BigDecimal unitPrice;
+    private String address;
+    private String orderId;
+    private LocalDate orderDate;
 
-    public CustomDTO(){
+
+    public CustomDTO() {
 
     }
-    public CustomDTO(String id,String name,String itemCode,int qty,BigDecimal unitPrice){
+
+    public CustomDTO(String id, String name, String address,String orderId, LocalDate orderDate) {
         this.id = id;
         this.name = name;
-        this.itemCode = itemCode;
-        this.qty = qty;
-        this.unitPrice = unitPrice;
+        this.address = address;
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+
     }
 
     public String getId() {
@@ -26,5 +30,49 @@ public class CustomDTO {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "CustomerOrderDTO{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                "orderId='" + orderId + '\'' +
+                ", orderDate=" + orderDate +
+                '}';
     }
 }
